@@ -1,5 +1,5 @@
 # miniblk
-miniblink 的OCX封装
+VS 2008开发的 miniblink 的OCX封装
 
 已完成的：
 
