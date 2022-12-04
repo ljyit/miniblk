@@ -1,0 +1,160 @@
+// miniblk.idl : ActiveX 控件项目的类型库源。
+
+// 此文件将由 MIDL 编译器工具处理以
+// 产生类型库(miniblk.tlb)，该类型库将成为
+// miniblk.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+#include "olectl.h"
+#include "olectl.h"
+
+[ uuid(775B09F0-2D0C-4E6F-80D0-02456AAE4568), version(1.0),
+  helpfile("miniblk.hlp"),
+  helpstring("miniblk ActiveX 控件模块"),
+  control ]
+library miniblkLib
+{
+	importlib(STDOLE_TLB);
+
+	//  JSValue 的主调度接口
+		
+	[ uuid(B4AE6DFE-0137-4CEA-9AAF-D925DC41CD73) ]
+	dispinterface IJSValue
+	{
+		properties:
+			[id(8), helpstring("属性 Key")] BSTR Key;
+			[id(9), helpstring("属性 Value")] VARIANT Value;
+			[id(0), helpstring("属性 Value")] VARIANT _Value;
+	methods:
+			[id(1), helpstring("方法Type O- Object,A- Array, C-String ,D- Double,L- True or False ,N- null")] CHAR Type(void);
+			[id(2), helpstring("方法isObject")] VARIANT_BOOL isObject(void);
+			[id(3), helpstring("方法isArray")] VARIANT_BOOL isArray(void);
+			[id(4), helpstring("方法isString")] VARIANT_BOOL isString(void);
+			[id(5), helpstring("方法isNumber")] VARIANT_BOOL isNumber(void);
+			[id(6), helpstring("方法isLogical")] VARIANT_BOOL isLogical(void);
+			[id(7), helpstring("方法isNull")] VARIANT_BOOL isNull(void);
+			[id(10), helpstring("方法Count")] ULONG Count(void);
+			[id(11), helpstring("方法Item")] IJSValue* Item(VARIANT idx);
+	};
+
+	//  JSValue 的类信息
+
+	[ uuid(04ED7311-AE2A-4E80-8D62-EA408724D070) ]
+	coclass JSValue
+	{
+		[default] dispinterface IJSValue;
+	};
+
+	//  Headers 的主调度接口
+		
+	[ uuid(4AE5F4F4-D042-4D45-B530-AC83A0FF287A) ]
+	dispinterface IHeaders
+	{
+		properties:
+		methods:
+			[id(1), helpstring("方法Count")] ULONG Count(void);
+			[id(2), helpstring("方法Clear")] void Clear(void);
+			[id(3), helpstring("方法Add")] void Add(BSTR key, BSTR value);
+			[id(4), helpstring("方法item")] BSTR item(ULONG idx);
+	};
+
+	//  Headers 的类信息
+
+	[ uuid(C8EAF9DD-964D-491E-B65A-4CAA5BC7CD07) ]
+	coclass Headers
+	{
+		[default] dispinterface IHeaders;
+	};
+
+	typedef enum tagFontAlign
+	{
+		[helpstring("Left")]Left=0,
+		[helpstring("Center")]Center=1,
+		[helpstring("Right")]Right=2,
+	}FontAlign;
+	//  CminiblkCtrl 的主调度接口
+
+	[ uuid(C063C610-02D3-4893-BF59-7A8206ED668E),
+	  helpstring("miniblk Control 的调度接口")]
+	dispinterface _Dminiblk
+	{
+
+
+	properties:
+			[id(2),  helpstring("miniblink的句柄，可直接用于API")] ULONG wkeHandle;
+			[id(4),  helpstring("是否可以后退")] VARIANT_BOOL CanGoBack;
+			[id(5),  helpstring("是否可以前进")] VARIANT_BOOL CanGoForward;
+			[id(9),  helpstring("是否启用触摸屏模式，默认否")] VARIANT_BOOL TouchEnabled;
+			[id(10), helpstring("是否允许快捷菜单,默认是")] VARIANT_BOOL ContextMenuEnabled;
+			[id(11), helpstring("是否允许鼠标，默认是")] VARIANT_BOOL MouseEnabled;
+			[id(17), helpstring("miniblink版本")] BSTR Version;
+			[id(19), helpstring("浏览器的UA")] BSTR UserAgent;
+			[id(23), helpstring("设置自动回收系统资源时间间隔，单位秒，默认300秒。")] ULONG ResourceGc;
+			[id(27), helpstring("开启无头模式，默认关。开启后页面不会被渲染上屏，直接内存运行，大幅提升性能。")] VARIANT_BOOL HeadlessEnabled;
+			[id(28), helpstring("DOM文档结构是否加载完成。")] VARIANT_BOOL IsDocumentReady;
+			[id(29), helpstring("设置local storage的全路径。必须且只能是目录，默认是当前目录。")] BSTR LocalStorageFullPath;
+			[id(35), helpstring("设置页面缩放系数，默认是1。")] FLOAT ZoomFactor;
+			[id(36), helpstring("属性 Align")] FontAlign textAlign;
+			[id(37), helpstring("当前窗口标题")] BSTR Title;
+			[id(38), helpstring("获取网页排版出来的宽度")] ULONG ContentWidth;
+			[id(39), helpstring("网页排版出来的高度")] ULONG ContentHeight;
+			[id(40), helpstring("设置或读取Cookies是否启用，但不影响CURL的cookies设置")] VARIANT_BOOL CookieEnabled;
+			[id(41), helpstring("读取或设置cookie的本地文件路径")] BSTR CookiePath;
+	methods:
+			[id(DISPID_ABOUTBOX)] void AboutBox();
+			[id(1),  helpstring("打开网址")] void LoadUrl(BSTR url);
+			[id(3),  helpstring("获取cookies")] BSTR GetCookie(void);
+			[id(6),  helpstring("后退")] VARIANT_BOOL GoBack(void);
+			[id(7),  helpstring("前进")] VARIANT_BOOL GoForward(void);
+			[id(8),  helpstring("刷新网页")] void Reload(void); 
+			[id(13), helpstring("在wkeOnLoadUrlBegin回调里调用，设置http请求的MIME类型")] void NetSetMIMEType(ULONG job, BSTR type);
+			[id(14), helpstring("在wkeOnLoadUrlBegin回调里调用，设置传给浏览器的数据，数据内容可以为js代码，图片，字符串，数据块等任意类型，设置此接口后会触发OnLoadUrlEnd事件。")] void NetSetData(ULONG job, BSTR data, ULONG datalen);
+			[id(16), helpstring("打开文件")] void LoadFile(BSTR filename);
+			[id(18), helpstring("设置代理服务器")] void SetProxy(ULONG type, BSTR hostname, SHORT port, BSTR username, BSTR password);
+			[id(20), helpstring("设置焦点")] void SetFocus(void);
+			[id(21), helpstring("执行JS代码")] IJSValue* RunJS(BSTR script);
+			[id(22), helpstring("加载HTML代码")] void LoadHTML(BSTR html);
+			[id(24), helpstring("停止当前页面加载")] void StopLoading(void);
+			[id(25), helpstring("设置Cookie，必须符合curl的标准写法。如：PERSONALIZE=123;expires=Monday 13-Jun-2022 03:04:55 GMT; domain=.fidelity.com; path=/; secure")] void SetCookie(BSTR url, BSTR cookies);
+			[id(26), propget, helpstring("属性 Headers")] IHeaders* Headers(void);
+			[id(30), helpstring("触发一个鼠标事件")] void FireMouseEvent(ULONG msg, LONG x, LONG y, ULONG flags);
+			[id(31), helpstring("向webView发送滚轮消息。")] void FireMouseWheelEvent(LONG x, LONG y, LONG delta, LONG flag);
+			[id(32), helpstring("向webView发送WM_KEYUP消息。")] void FireKeyUpEvent(ULONG virtualKeyCode, ULONG flags, VARIANT_BOOL systemKey);
+			[id(33), helpstring("向webView发送WM_KEYDOWN消息。")] void FireKeyDownEvent(ULONG virtualKeyCode, ULONG flags, VARIANT_BOOL systemKey);
+			[id(34), helpstring("向webView发送WM_KEYPRESS消息。")] void FireKeyPressEvent(ULONG charCode, ULONG flags, VARIANT_BOOL systemKey);
+	};
+
+	//  CminiblkCtrl 的事件调度接口
+
+	[ uuid(13340B10-871F-4023-9843-B75583FA160B),
+	  helpstring("miniblk Control 的事件接口") ]
+	dispinterface _DminiblkEvents
+	{
+		properties:
+			//  事件接口没有任何属性
+
+		methods:
+			[id(1),helpstring("当开始加载时发生")] void OnLoadUrlBegin(ULONG web, ULONG parm, BSTR url,ULONG job, VARIANT_BOOL* cancel);
+			[id(2),helpstring("当浏览器标题改变时发生")] void OnTitleChanged(ULONG web, ULONG parm, BSTR title);
+			[id(3),helpstring("当URL改变时发生")] void OnURLChanged(ULONG web, ULONG parm, ULONG frameId, BSTR url);
+			[id(4),helpstring("当页面导航时发生")] void OnNavigation(ULONG web, ULONG parm, ULONG type, BSTR url,VARIANT_BOOL* cancel);
+			[id(5),helpstring("当文档加载完成时发生")] void OnDocumentReady(ULONG web, ULONG parm, ULONG frameID);
+			[id(6),helpstring("当页面加载完成时发生")] void OnLoadingFinish(ULONG web, ULONG parm, BSTR url, ULONG result, BSTR failedReason);
+			[id(7),helpstring("当网页弹出alert时发生")] void OnAlertBox(BSTR message);
+			[id(8),helpstring("当有控制台输出时发生")] void OnConsole(ULONG web, ULONG param, ULONG level, BSTR message, BSTR sourceName, ULONG sourceLine, BSTR stackTrace);
+			[id(9),helpstring("当URL完成时")]  void OnLoadUrlFinish(ULONG web, ULONG parm, BSTR url, ULONG job, ULONG len);
+			[id(10),helpstring("当URL加载完成时")]  void OnLoadUrlEnd(ULONG web, ULONG parm, BSTR url, ULONG job, BYTE* data, ULONG len);
+	};
+
+	//  CminiblkCtrl 的类信息
+
+	[ uuid(24354416-5082-41E6-AE04-D01A23BB567B),
+	  helpstring("miniblk Control"), control ]
+	coclass miniblk
+	{
+		[default] dispinterface _Dminiblk;
+		[default, source] dispinterface _DminiblkEvents;
+	};
+
+};

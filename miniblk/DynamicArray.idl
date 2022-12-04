@@ -1,0 +1,41 @@
+import "oaidl.idl";
+import "ocidl.idl";
+ [
+        object,
+        uuid(7942687C-3E0D-468B-80E7-7D0FC34B15EF),
+        dual,
+        helpstring("IVector Interface"),
+        pointer_default(unique)
+    ]
+    interface IVector : IDispatch
+    {
+            [id(DISPID_NEWENUM), propget]
+            HRESULT _NewEnum([out, retval] IUnknown** ppUnk);
+ 
+            [id(DISPID_VALUE), propget]
+            HRESULT Item(   [in] long Index, 
+                            [out, retval] VARIANT* pVal);
+ 
+            [id(0x00000001), propget]
+            HRESULT Count([out, retval] long * pVal);
+    };
+ 
+[
+    uuid(A08196C2-46C7-4BE2-824D-A26581990B43),
+    version(1.0),
+    helpstring("DynamicArray 1.0 Type Library")
+]
+library DYNAMICARRAYLib
+{
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+ 
+    [
+        uuid(38080E8B-9884-49CA-932D-A298E6882598),
+        helpstring("Vector Class")
+    ]
+    coclass Vector
+    {
+        [default] interface IVector;
+    };
+};
