@@ -25,6 +25,7 @@ miniblink 的OCX封装
     BSTR          LocalStorageFullPath   设置localstorage的全路径。必须且只能是目录，默认是当前目录。
 
 方法：
+
     void          LoadUrl(BSTR url)      打开网址   
     void          LoadFile(BSTR filename 打开文件  
     void          LoadHTML(BSTR html)    加载HTML代码  
@@ -46,6 +47,7 @@ miniblink 的OCX封装
     void          FireKeyPressEvent(ULONG charCode, ULONG flags, VARIANT_BOOL systemKey)       向webView发送WM_KEYPRESS消息。   
 
 事件:
+
 OnLoadUrlBegin(ULONG web, ULONG parm, BSTR url,ULONG job, VARIANT_BOOL* cancel)    当开始加载时发生
 OnTitleChanged(ULONG web, ULONG parm, BSTR title)                                  当浏览器标题改变时发生
 OnURLChanged(ULONG web, ULONG parm, ULONG frameId, BSTR url)                       当URL改变时发生
@@ -56,4 +58,5 @@ OnAlertBox(BSTR message)                                                        
 OnConsole(ULONG web, ULONG param, ULONG level, BSTR message, BSTR sourceName, ULONG sourceLine, BSTR stackTrace);当有控制台输出时发生
 OnLoadUrlFinish(ULONG web, ULONG parm, BSTR url, ULONG job, ULONG len)             当URL完成时
 OnLoadUrlEnd(ULONG web, ULONG parm, BSTR url, ULONG job, BYTE* data, ULONG len)    当URL加载完成时
+
       
