@@ -48,15 +48,16 @@ miniblink 的OCX封装
 
 事件:
 
-OnLoadUrlBegin(ULONG web, ULONG parm, BSTR url,ULONG job, VARIANT_BOOL* cancel)    当开始加载时发生
-OnTitleChanged(ULONG web, ULONG parm, BSTR title)                                  当浏览器标题改变时发生
-OnURLChanged(ULONG web, ULONG parm, ULONG frameId, BSTR url)                       当URL改变时发生
-OnNavigation(ULONG web, ULONG parm, ULONG type, BSTR url,VARIANT_BOOL* cancel)     当页面导航时发生
-OnDocumentReady(ULONG web, ULONG parm, ULONG frameID)                              当文档加载完成时发生
-OnLoadingFinish(ULONG web, ULONG parm, BSTR url, ULONG result, BSTR failedReason)  当页面加载完成时发生
-OnAlertBox(BSTR message)                                                           当网页弹出alert时发生
-OnConsole(ULONG web, ULONG param, ULONG level, BSTR message, BSTR sourceName, ULONG sourceLine, BSTR stackTrace);当有控制台输出时发生
-OnLoadUrlFinish(ULONG web, ULONG parm, BSTR url, ULONG job, ULONG len)             当URL完成时
-OnLoadUrlEnd(ULONG web, ULONG parm, BSTR url, ULONG job, BYTE* data, ULONG len)    当URL加载完成时
+    OnLoadUrlBegin(ULONG web, ULONG parm, BSTR url,ULONG job, VARIANT_BOOL* cancel)    当开始加载时发生
+    OnTitleChanged(ULONG web, ULONG parm, BSTR title)                                  当浏览器标题改变时发生
+    OnURLChanged(ULONG web, ULONG parm, ULONG frameId, BSTR url)                       当URL改变时发生
+    OnNavigation(ULONG web, ULONG parm, ULONG type, BSTR url,VARIANT_BOOL* cancel)     当页面导航时发生
+    OnDocumentReady(ULONG web, ULONG parm, ULONG frameID)                              当文档加载完成时发生
+    OnLoadingFinish(ULONG web, ULONG parm, BSTR url, ULONG result, BSTR failedReason)  当页面加载完成时发生
+    OnAlertBox(BSTR message)                                                           当网页弹出alert时发生
+    OnConsole(ULONG web, ULONG param, ULONG level, BSTR message, BSTR sourceName, ULONG sourceLine, BSTR stackTrace);当有控制台输出时发生
+    OnLoadUrlFinish(ULONG web, ULONG parm, BSTR url, ULONG job, ULONG len)             当URL完成时
+    OnLoadUrlEnd(ULONG web, ULONG parm, BSTR url, ULONG job, BYTE* data, ULONG len)    当URL加载完成时
+
 
       
